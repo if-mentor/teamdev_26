@@ -1,0 +1,41 @@
+{
+  "name": "next_teamdev_template",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "check": "npx prettier --check \"src/**/*.{css,js,ts,jsx,tsx}\"",
+    "format": "npx prettier --write \"src/**/*.{css,js,ts,jsx,tsx}\"",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{css,js,ts,jsx,tsx}": [
+      "prettier --write \"src/**/*.{css,js,ts,jsx,tsx}\"",
+      "eslint . --max-warnings 0 --no-warn-ignored"
+    ]
+  },
+  "dependencies": {
+    "next": "^16.3.5",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@prisma/client": "^7.10.0",
+    "@supabase/ssr": "^0.12.7",
+    "@supabase/supabase-js": "^2.116.0",
+    "@types/node": "^20.19.43",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.3.5",
+    "eslint-config-prettier": "^10.1.8",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.5.1",
+    "prettier": "^3.9.6",
+    "prisma": "^7.10.0",
+    "typescript": "^5"
+  }
+}
