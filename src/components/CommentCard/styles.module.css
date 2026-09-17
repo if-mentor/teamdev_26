@@ -1,0 +1,48 @@
+.card {
+  display: flex;
+  gap: 18px;
+  padding: 12px 14px 16px 14px;
+  background-color: #e3e3e3;
+  border-radius: 5px;
+}
+
+.avatar {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.body {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.header {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.userName {
+  font-size: 12px;
+  line-height: 30px;
+  font-weight: 400;
+  color: #000;
+}
+
+.createdAt {
+  font-size: 12px;
+  opacity: 0.5;
+}
+
+.content {
+  overflow-wrap: break-word;
+  margin: 0;
+  font-size: 12px;
+  line-height: 16px;
+  white-space: pre-wrap;
+}
