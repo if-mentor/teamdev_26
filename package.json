@@ -19,10 +19,12 @@
   },
   "dependencies": {
     "next": "^16.3.5",
+    "normalize.css": "^8.0.1",
     "react": "^19.3.0",
     "react-dom": "^19.3.0"
   },
   "devDependencies": {
+    "@prisma/client": "^7.10.0",
     "@supabase/ssr": "^0.12.7",
     "@supabase/supabase-js": "^2.116.0",
     "@types/node": "^20.19.43",
