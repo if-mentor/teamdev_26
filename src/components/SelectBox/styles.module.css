@@ -1,7 +1,6 @@
 .selectBoxContainer {
   display: flex;
   flex-flow: column;
-  margin: 40px;
 }
 
 .label {
