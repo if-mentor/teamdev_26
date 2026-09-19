@@ -4,7 +4,6 @@
 }
 
 .label {
-  font-family: "Noto Sans JP", sans-serif;
   font-size: 16px;
   font-weight: 400;
   color: #59636e;
@@ -16,7 +15,6 @@
   border: 1px solid #d1d9e0;
   background-color: #ffffff;
   box-sizing: border-box;
-  font-family: "Noto Sans JP", sans-serif;
   font-size: 12px;
   font-weight: 400;
   color: #59636e;
