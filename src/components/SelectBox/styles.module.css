@@ -1,6 +1,7 @@
 .selectBoxContainer {
   display: flex;
   flex-flow: column;
+  width: 240px;
 }
 
 .label {
@@ -11,21 +12,18 @@
 
 .selectBoxWrapper {
   position: relative;
-  width: 240px;
 }
 
 .selectBoxWrapper::after {
   content: "";
-  display: block;
   position: absolute;
   right: 12px;
   top: 50%;
-  transform: translateY(calc(-50% - 3px)) rotate(135deg);
+  transform: translateY(-50%) rotate(135deg);
   width: 6px;
   height: 6px;
   border-top: 1.6px solid #1e1e1e;
   border-right: 1.6px solid #1e1e1e;
-  z-index: 10;
 }
 
 .selectBox {
@@ -34,7 +32,6 @@
   border: 1px solid #d8d8d8;
   border-radius: 8px;
   -webkit-appearance: none;
-  position: relative;
 }
 
 .option {
