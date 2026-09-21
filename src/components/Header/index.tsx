@@ -3,7 +3,7 @@
 // setIsAuthenticatedが使われていないという警告が出るので、isAuthenticatedをfalseに固定するようにしています。
 // import { useState } from "react";
 import Link from "next/link";
-import styles from "./Header.module.css";
+import styles from "./styles.module.css";
 
 const Header = () => {
   // const [isAuthenticated, setIsAuthenticated] = useState(false);
