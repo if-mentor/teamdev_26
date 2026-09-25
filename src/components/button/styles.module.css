@@ -3,6 +3,10 @@
   flex-direction: column;
 }
 
+.button {
+  text-align: center;
+}
+
 .label {
   font-size: 16px;
   font-weight: 700;
@@ -14,7 +18,6 @@
   background-color: white;
   border: 1px solid #000;
   border-radius: 8px;
-  text-align: center;
 }
 
 .success {
@@ -23,7 +26,6 @@
   background-color: #18a0fb;
   color: white;
   border-radius: 8px;
-  text-align: center;
 }
 
 .secondary {
@@ -32,7 +34,6 @@
   background-color: #383838;
   color: white;
   border-radius: 8px;
-  text-align: center;
 }
 
 .danger {
@@ -41,7 +42,6 @@
   background-color: #ff4136;
   color: white;
   border-radius: 6px;
-  text-align: center;
 }
 
 .medium {
@@ -50,7 +50,6 @@
   background-color: #18a0fb;
   color: white;
   border-radius: 6px;
-  text-align: center;
 }
 
 .large {
@@ -59,5 +58,4 @@
   background-color: #18a0fb;
   color: white;
   border-radius: 6px;
-  text-align: center;
 }
