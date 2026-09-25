@@ -1,4 +1,4 @@
-import { ButtonProps } from "./types";
+import { ButtonProps } from "./type";
 import styles from "./button.module.css";
 
 const Button = ({ label, type, onClick, disabled, variant = "primary", size = "medium", ...props }: ButtonProps) => {
