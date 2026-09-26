@@ -1,0 +1,40 @@
+.wrapper {
+  display: grid;
+  place-content: center;
+  position: relative; /* next/image の fill を使うために必要 */
+  width: 760px;
+  height: auto;
+  margin-inline: auto;
+  aspect-ratio: 2 / 1;
+  border: 2px dashed #000;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.hasImage {
+  border-color: transparent;
+}
+
+.imageButton {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.imageButton:disabled {
+  cursor: not-allowed;
+}
+
+.image {
+  object-fit: contain;
+}
+
+.error {
+  margin-top: 8px;
+  color: #ff4136;
+  font-size: 14px;
+  text-align: center;
+}
