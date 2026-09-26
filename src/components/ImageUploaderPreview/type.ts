@@ -1,5 +1,5 @@
 export interface ImagePreviewProps {
-  imageFile: string;
+  imageFile?: File | string;
   accept?: string;
   maxFileSize?: number;
   disabled?: boolean;

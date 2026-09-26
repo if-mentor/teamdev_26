@@ -23,8 +23,12 @@ const ImageUploaderPreview = ({
   onChange,
 }: ImagePreviewProps) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  // previewUrl の型（画像の URL が入る / 未選択なら ""
-  const [previewUrl, setPreviewUrl] = useState<string>(imageFile || "");
+  // プレビューする画像の URL（未選択なら ""）
+  // imageFile が URL ならそのまま使い、File ならプレビュー用の blob URL を作る
+  const [previewUrl, setPreviewUrl] = useState<string>(() => {
+    if (!imageFile) return "";
+    return typeof imageFile === "string" ? imageFile : URL.createObjectURL(imageFile);
+  });
   const [error, setError] = useState<string | null>(null);
 
   // 作成した blob URL を解放する（メモリリーク対策）
