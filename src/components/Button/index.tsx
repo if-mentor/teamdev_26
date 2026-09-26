@@ -6,9 +6,9 @@ const Button = ({ label, type, onClick, disabled, variant = "primary", size = "m
     <button
       type={type}
       className={`
-  ${styles.button}
-  ${styles[variant]}
-  ${styles[size]}
+        ${styles.button}
+        ${styles[variant]}
+        ${styles[size]}
 `}
       onClick={onClick}
       disabled={disabled}
