@@ -16,6 +16,7 @@
 .titleRow {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding-left: 12px;
   padding-right: 15px;
   margin-top: 12px;
@@ -34,20 +35,19 @@
 
 .category {
   width: 33px;
+  flex-shrink: 0;
   font-size: 8px;
   font-weight: 400;
-  line-height: 36px;
   letter-spacing: -0.015em;
   text-align: right;
   color: #18a0fb;
 }
 
 .author {
-  margin-top: -12px;
+  margin: 6px;
   padding-left: 12px;
   font-size: 8px;
   font-weight: 400;
-  line-height: 30px;
   letter-spacing: -0.015em;
   color: rgba(0, 0, 0, 0.5);
   white-space: nowrap;
@@ -58,6 +58,7 @@
   height: 36px;
   padding-left: 12px;
   overflow: hidden;
+  overflow-wrap: break-word;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   line-clamp: 2;
