@@ -1,0 +1,44 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+  background: #d9d9d9;
+  height: 72px;
+}
+
+.nav {
+  display: flex;
+  gap: 24px;
+  margin-left: auto;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.leftLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  text-decoration: none;
+  width: 120px;
+  height: 40px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid #000000;
+}
+
+.rightLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  text-decoration: none;
+  width: 120px;
+  height: 40px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: #383838;
+  color: #ffffff;
+}

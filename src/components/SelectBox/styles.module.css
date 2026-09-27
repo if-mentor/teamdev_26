@@ -1,0 +1,40 @@
+.selectBoxContainer {
+  display: flex;
+  flex-flow: column;
+  width: 240px;
+}
+
+.label {
+  color: #1e1e1e;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.selectBoxWrapper {
+  position: relative;
+}
+
+.selectBoxWrapper::after {
+  content: "";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%) rotate(135deg);
+  width: 6px;
+  height: 6px;
+  border-top: 1.6px solid #1e1e1e;
+  border-right: 1.6px solid #1e1e1e;
+}
+
+.selectBox {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d8d8d8;
+  border-radius: 8px;
+  -webkit-appearance: none;
+}
+
+.option {
+  color: #1e1e1e;
+  font-size: 16px;
+}
