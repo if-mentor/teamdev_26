@@ -5,49 +5,43 @@
 
 .button {
   text-align: center;
-}
-
-.label {
+  border: none;
+  outline: none;
+  appearance: none;
   font-size: 16px;
   font-weight: 700;
 }
 
+.button:hover {
+  cursor: pointer;
+}
+
 .primary {
-  width: 120px;
-  height: 40px;
   background-color: white;
-  border: 1px solid #000;
   border-radius: 8px;
 }
 
 .success {
-  width: 120px;
-  height: 40px;
   background-color: #18a0fb;
   color: white;
   border-radius: 8px;
 }
 
 .secondary {
-  width: 120px;
-  height: 40px;
   background-color: #383838;
   color: white;
   border-radius: 8px;
 }
 
 .danger {
-  width: 120px;
-  height: 40px;
   background-color: #ff4136;
   color: white;
   border-radius: 6px;
 }
 
 .medium {
-  width: 400px;
+  width: 120px;
   height: 40px;
-  background-color: #18a0fb;
   color: white;
   border-radius: 6px;
 }
@@ -55,7 +49,6 @@
 .large {
   width: 480px;
   height: 48px;
-  background-color: #18a0fb;
   color: white;
   border-radius: 6px;
 }
