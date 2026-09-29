@@ -1,0 +1,21 @@
+.form {
+  padding: auto;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 482px;
+  height: 550px;
+}
+
+.link {
+  text-align: right;
+  padding-top: 12px;
+  font-size: 12px;
+  text-align: right;
+}
+
+.login {
+  color: #00bfff;
+}
