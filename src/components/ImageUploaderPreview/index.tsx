@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, type ChangeEvent } from "react";
 import Image from "next/image";
 import styles from "./styles.module.css";
 import type { ImagePreviewProps } from "./type";
+import Button from "../Button";
 
 const DEFAULT_ACCEPT = "image/png,image/jpeg";
 const DEFAULT_MAX_FILE_SIZE = 3 * 1024 * 1024; // 3MB
@@ -70,22 +71,31 @@ const ImageUploaderPreview = ({
       {/* wrapper は画像の有無にかかわらず常に表示する */}
       <div className={`${styles.wrapper} ${previewUrl ? styles.hasImage : ""}`}>
         {/* プレビューする画像があるかどうかで表示を切り替える */}
+
         {previewUrl ? (
           // 画像があるとき：画像をクリックすると選び直せる
-          <button
-            type="button"
-            className={styles.imageButton}
-            disabled={disabled}
-            onClick={openFileDialog}
-            aria-label="画像を選び直す"
-          >
+          <>
+            <Button
+              type="button"
+              variant="success"
+              className={styles.imageButton}
+              disabled={disabled}
+              onClick={openFileDialog}
+              label=""
+            ></Button>
             <Image src={previewUrl} alt="プレビュー画像" fill className={styles.image} unoptimized />
-          </button>
+          </>
         ) : (
           // 画像がないとき：アップロードボタンを表示 後にボタンコンポーネントに置き換え
-          <button type="button" disabled={disabled} onClick={openFileDialog}>
-            画像アップロード
-          </button>
+          <Button
+            type="button"
+            variant="success"
+            // className={styles.buttonText}
+            disabled={disabled}
+            onClick={openFileDialog}
+            label="画像アップロード"
+            style={{ fontSize: "12px" }}
+          ></Button>
         )}
       </div>
       {/* ref と onChange を input に紐づける */}
