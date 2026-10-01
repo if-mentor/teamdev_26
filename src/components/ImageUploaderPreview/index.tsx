@@ -90,7 +90,6 @@ const ImageUploaderPreview = ({
           <Button
             type="button"
             variant="success"
-            // className={styles.buttonText}
             disabled={disabled}
             onClick={openFileDialog}
             label="画像アップロード"
