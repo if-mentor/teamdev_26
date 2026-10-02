@@ -3,10 +3,11 @@
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import styles from "./styles.module.css";
+import Link from "next/link";
 
 export function SignUpForm() {
   return (
-    <div className={styles.form}>
+    <form className={styles.form}>
       <h1>新規登録</h1>
       <Input label="名前" placeholder="名前を入力" />
       <Input label="メールアドレス" placeholder="メールアドレスを入力" />
@@ -16,12 +17,12 @@ export function SignUpForm() {
         <p className={styles.link}>
           すでにアカウントをお持ちの方は
           <span>
-            <a href="/login" className={styles.login}>
+            <Link href="/login" className={styles.login}>
               ログイン
-            </a>
+            </Link>
           </span>
         </p>
       </div>
-    </div>
+    </form>
   );
 }

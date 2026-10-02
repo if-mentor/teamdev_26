@@ -1,12 +1,9 @@
 .form {
-  padding: auto;
-  margin: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  width: 482px;
-  height: 550px;
+  gap: 60px;
 }
 
 .link {
