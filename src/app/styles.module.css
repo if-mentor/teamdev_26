@@ -7,7 +7,8 @@
 
 .cardList {
   display: grid;
-  grid-template-columns: repeat(4, 280px);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  justify-items: center;
   column-gap: 64px;
   row-gap: 47px;
   margin: 52px 64px;
