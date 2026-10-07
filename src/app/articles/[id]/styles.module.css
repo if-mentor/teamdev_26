@@ -18,7 +18,7 @@
   align-items: center;
 }
 
-.articleTtl {
+.articleTitle {
   font-size: 32px;
   font-weight: 700;
   letter-spacing: -0.015em;
@@ -37,7 +37,13 @@
 }
 
 .authorIcon {
+  width: 32px;
   margin-left: 15px;
+}
+
+.authorIcon img {
+  width: 100%;
+  height: auto;
 }
 
 .image {
@@ -78,18 +84,29 @@
   line-height: 1;
 }
 
+.editButton {
+  width: 120px;
+  height: 40px;
+  color: #fff;
+  background-color: #18a0fb;
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: -0.015em;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .commentSection {
   margin-top: 16px;
 }
 
-.commentTtl {
+.commentTitle {
   font-size: 16px;
   font-weight: 700;
   letter-spacing: -0.015em;
   line-height: 1.8;
-}
-
-.num {
 }
 
 .commentFormWrap {

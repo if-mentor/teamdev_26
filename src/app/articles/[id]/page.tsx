@@ -1,12 +1,10 @@
 import Image from "next/image";
+import Link from "next/link";
 import styles from "./styles.module.css";
-
-import Button from "@/components/Button";
 import CommentForm from "@/components/CommentForm";
 import CommentCard from "@/components/CommentCard";
-
-import dummyImage from "../../../../public/articles/dummy_image.jpg";
-import dummyAuthorIcon from "../../../../public/articles/dummy_author_icon.png";
+import dummyImage from "../../../../public/sample1.jpg";
+import dummyAuthorIcon from "../../../../public/default_user_icon.png";
 
 const MINUTE = 60 * 1000;
 const HOUR = 60 * MINUTE;
@@ -80,7 +78,7 @@ const ArticleDetailPage = () => {
         <div className={styles.inner}>
           <article className={styles.article}>
             <div className={styles.header}>
-              <h1 className={styles.articleTtl}>{dummyArticle.title}</h1>
+              <h1 className={styles.articleTitle}>{dummyArticle.title}</h1>
               <div className={styles.author}>
                 <span className={styles.authorName}>{dummyArticle.author}</span>
                 <div className={styles.authorIcon}>
@@ -99,12 +97,14 @@ const ArticleDetailPage = () => {
               <time className={styles.createdAt} dateTime={dummyArticle.createdAt}>
                 {formatRelativeTime(dummyArticle.createdAt)}
               </time>
-              <Button label="編集" />
+              <Link href="articles/{id}/edit" className={styles.editButton}>
+                編集
+              </Link>
             </div>
           </article>
 
           <section className={styles.commentSection}>
-            <h2 className={styles.commentTtl}>
+            <h2 className={styles.commentTitle}>
               <span className={styles.num}>{dummyComments.length}</span>件のコメント
             </h2>
             <div className={styles.commentFormWrap}>
