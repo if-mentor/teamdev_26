@@ -1,0 +1,38 @@
+name: 'Auto Assign'
+on:
+  pull_request:
+    types: [opened, ready_for_review]
+
+permissions:
+  pull-requests: write
+
+jobs:
+  auto-assign:
+    # ドラフトPRの時はスキップ
+    if: github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    steps:
+      - name: Assign author and request reviewers
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          AUTHOR: ${{ github.event.pull_request.user.login }}
+          REVIEWERS: "takanorishinagawa"
+        run: |
+          # 作成者本人をレビュアー候補から除く
+          reviewers=""
+          for r in $REVIEWERS; do
+            if [ "$r" != "$AUTHOR" ]; then
+              reviewers="${reviewers:+$reviewers,}$r"
+            fi
+          done
+
+          # Assignee に作成者を設定
+          gh pr edit "$PR_NUMBER" --repo "$REPO" --add-assignee "$AUTHOR"
+
+          # Reviewer を設定
+          if [ -n "$reviewers" ]; then
+            gh pr edit "$PR_NUMBER" --repo "$REPO" --add-reviewer "$reviewers"
+          fi
+          

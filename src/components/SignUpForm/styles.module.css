@@ -1,0 +1,18 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+  min-height: calc(100vh - 72px);
+}
+
+.link {
+  text-align: right;
+  padding-top: 12px;
+  font-size: 12px;
+}
+
+.login {
+  color: #00bfff;
+}
