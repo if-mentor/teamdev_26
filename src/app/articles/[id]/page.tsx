@@ -71,7 +71,15 @@ const dummyComments = [
   },
 ];
 
-const ArticleDetailPage = () => {
+type ArticleDetailPageProps = {
+  params: Promise<{
+    id: string;
+  }>;
+};
+
+const ArticleDetailPage = async ({ params }: ArticleDetailPageProps) => {
+  const { id } = await params;
+
   return (
     <>
       <main className={styles.content}>
@@ -97,7 +105,7 @@ const ArticleDetailPage = () => {
               <time className={styles.createdAt} dateTime={dummyArticle.createdAt}>
                 {formatRelativeTime(dummyArticle.createdAt)}
               </time>
-              <Link href="articles/{id}/edit" className={styles.editButton}>
+              <Link href={`/articles/${id}/edit`} className={styles.editButton}>
                 編集
               </Link>
             </div>
