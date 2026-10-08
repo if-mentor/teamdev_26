@@ -14,7 +14,7 @@ const Login = () => {
           <Button type="submit" label="ログイン" size="large" />
           <p className={styles.p}>
             アカウントをお持ちでない方は
-            <Link href="/signup" className={styles.Link}>
+            <Link href="/signup" className={styles.link}>
               新規登録
             </Link>
           </p>
