@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { supabase } from "@/libs/supabase";
+import { prisma } from "@/libs/prisma";
 
 export async function POST(request: Request) {
   const body = await request.json();
@@ -41,6 +42,16 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "パスワードは24文字以内で入力してください" }, { status: 400 });
   }
 
+  const existingUser = await prisma.user.findFirst({
+    where: {
+      email: trimmedEmail,
+    },
+  });
+
+  if (existingUser) {
+    return NextResponse.json({ error: "このメールアドレスは既に登録されています" }, { status: 400 });
+  }
+
   const { data, error } = await supabase.auth.signUp({
     email: trimmedEmail,
     password: trimmedPassword,
@@ -50,9 +61,17 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: error.message }, { status: 400 });
   }
 
-  return NextResponse.json({
-    userId: data.user?.id,
-    userEmail: data.user?.email,
-    identities: data.user?.identities?.length,
+  if (!data.user) {
+    return NextResponse.json({ error: "ユーザー登録に失敗しました" }, { status: 500 });
+  }
+
+  await prisma.user.create({
+    data: {
+      id: data.user.id,
+      name: trimmedName,
+      email: trimmedEmail,
+    },
   });
+
+  return NextResponse.json({ message: "ユーザー登録が完了しました" }, { status: 201 });
 }
