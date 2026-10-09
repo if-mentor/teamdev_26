@@ -1,0 +1,45 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 72px);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 480px;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 63px;
+  margin-top: 0px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.inputMail {
+  margin-bottom: 51px;
+}
+
+.inputPassword {
+  margin-bottom: 48px;
+}
+
+.p {
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 12px;
+  align-self: flex-end;
+}
+
+.link {
+  color: #18a0fb;
+}
