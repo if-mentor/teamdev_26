@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "./styles.module.css";
 import Link from "next/link";
 import { LinkButtonProps } from "./type";

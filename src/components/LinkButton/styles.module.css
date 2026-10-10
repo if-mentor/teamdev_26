@@ -27,6 +27,8 @@
 
 .primary {
   background-color: white;
+  color: #383838;
+  border: 1px solid #000000;
   border-radius: 8px;
 }
 
@@ -51,13 +53,11 @@
 .medium {
   width: 120px;
   height: 40px;
-  color: white;
   border-radius: 6px;
 }
 
 .large {
   width: 480px;
   height: 48px;
-  color: white;
   border-radius: 6px;
 }
