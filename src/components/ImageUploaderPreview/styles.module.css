@@ -2,7 +2,7 @@
   display: grid;
   place-content: center;
   position: relative; /* next/image の fill を使うために必要 */
-  width: 760px;
+  width: 720px;
   height: auto;
   margin-inline: auto;
   aspect-ratio: 2 / 1;
