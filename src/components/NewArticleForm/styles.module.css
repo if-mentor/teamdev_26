@@ -1,5 +1,6 @@
 .form {
   margin: 0 auto;
+  padding-top: 48px;
   width: 720px;
   display: flex;
   flex-flow: column;
