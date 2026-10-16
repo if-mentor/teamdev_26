@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 import styles from "./styles.module.css";
@@ -12,6 +13,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const router = useRouter();
 
   const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -40,6 +42,7 @@ const Login = () => {
 
       return;
     }
+    router.push("/");
   };
   return (
     <div className={styles.wrapper}>
