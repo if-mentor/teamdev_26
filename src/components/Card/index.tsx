@@ -1,24 +1,10 @@
 import styles from "./styles.module.css";
 import type { CardProps } from "./type";
 import Image from "next/image";
+import { formatRelativeTime } from "@/utils/formatRelativeTime";
 
 const Card = ({ title, author, category, imageUrl, content, createdAt }: CardProps) => {
-  const createdDate = new Date(createdAt);
-  const now = new Date();
-  const diffMs = now.getTime() - createdDate.getTime();
-  const diffMinutes = Math.floor(diffMs / (1000 * 60));
-  const diffHours = Math.floor(diffMinutes / 60);
-  const diffDays = Math.floor(diffHours / 24);
-
-  let relativeTime = "";
-
-  if (diffMinutes < 60) {
-    relativeTime = `${diffMinutes}分前`;
-  } else if (diffHours < 24) {
-    relativeTime = `${diffHours}時間前`;
-  } else {
-    relativeTime = `${diffDays}日前`;
-  }
+  const relativeTime = formatRelativeTime(createdAt);
 
   return (
     <article className={styles.card}>
