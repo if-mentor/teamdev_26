@@ -3,8 +3,9 @@ import Link from "next/link";
 import styles from "./styles.module.css";
 import CommentForm from "@/components/CommentForm";
 import CommentCard from "@/components/CommentCard";
-import dummyImage from "../../../../public/sample1.jpg";
-import dummyAuthorIcon from "../../../../public/default_user_icon.png";
+//import dummyImage from "../../../../public/sample1.jpg";
+//import dummyAuthorIcon from "../../../../public/default_user_icon.png";
+import { prisma } from "@/libs/prisma";
 
 const MINUTE = 60 * 1000;
 const HOUR = 60 * MINUTE;
@@ -40,7 +41,7 @@ const formatRelativeTime = (dateString: string, now: Date = new Date()) => {
   });
 };
 
-const dummyArticle = {
+/*const dummyArticle = {
   id: 1,
   title: "Blog Title",
   author: "Author",
@@ -52,7 +53,7 @@ const dummyArticle = {
   content:
     "テキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入ります",
   createdAt: "2026-10-01T20:37:00+09:00",
-};
+};*/
 
 const dummyComments = [
   {
@@ -80,30 +81,40 @@ type ArticleDetailPageProps = {
 const ArticleDetailPage = async ({ params }: ArticleDetailPageProps) => {
   const { id } = await params;
 
+  const article = await prisma.post.findUnique({
+    where: {
+      id: BigInt(id),
+    },
+  });
+
+  if (!article) {
+    return <p>記事が見つかりませんでした。</p>;
+  }
+
   return (
     <>
       <main className={styles.content}>
         <div className={styles.inner}>
           <article className={styles.article}>
             <div className={styles.header}>
-              <h1 className={styles.articleTitle}>{dummyArticle.title}</h1>
+              <h1 className={styles.articleTitle}>{article.title}</h1>
               <div className={styles.author}>
-                <span className={styles.authorName}>{dummyArticle.author}</span>
+                <span className={styles.authorName}>{article.author}</span>
                 <div className={styles.authorIcon}>
-                  <Image src={dummyArticle.authorIcon} alt={dummyArticle.authorIconAlt} />
+                  <Image src={article.authorIcon} alt={article.authorIconAlt} />
                 </div>
               </div>
             </div>
             <div className={styles.image}>
-              <Image src={dummyArticle.image} alt={dummyArticle.imageAlt} />
+              <Image src={article.image} alt={article.imageAlt} />
             </div>
             <div className={styles.body}>
-              <p className={styles.category}>{dummyArticle.category}</p>
-              <p className={styles.text}>{dummyArticle.content}</p>
+              <p className={styles.category}>{article.category}</p>
+              <p className={styles.text}>{article.content}</p>
             </div>
             <div className={styles.footer}>
-              <time className={styles.createdAt} dateTime={dummyArticle.createdAt}>
-                {formatRelativeTime(dummyArticle.createdAt)}
+              <time className={styles.createdAt} dateTime={article.createdAt}>
+                {formatRelativeTime(article.createdAt)}
               </time>
               <Link href={`/articles/${id}/edit`} className={styles.editButton}>
                 編集
