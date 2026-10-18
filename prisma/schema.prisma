@@ -9,7 +9,7 @@ datasource db {
 model User {
   id        String   @id @db.Uuid
   name      String   @db.VarChar
-  email     String   @db.VarChar
+  email     String   @unique @db.VarChar
   imagePath String?  @map("image_path") @db.Text
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
   updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
@@ -33,7 +33,7 @@ model Post {
   categoryId BigInt   @map("category_id") @db.BigInt
   title      String   @db.VarChar
   content    String   @db.Text
-  imagePath  String?  @map("image_path") @db.Text
+  imagePath  String   @map("image_path") @db.Text
   createdAt  DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
   updatedAt  DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
 
