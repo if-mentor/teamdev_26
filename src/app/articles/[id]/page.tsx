@@ -4,7 +4,7 @@ import styles from "./styles.module.css";
 import CommentForm from "@/components/CommentForm";
 import CommentCard from "@/components/CommentCard";
 //import dummyImage from "../../../../public/sample1.jpg";
-//import dummyAuthorIcon from "../../../../public/default_user_icon.png";
+import dummyAuthorIcon from "../../../../public/default_user_icon.png";
 import { prisma } from "@/libs/prisma";
 
 const MINUTE = 60 * 1000;
@@ -85,6 +85,10 @@ const ArticleDetailPage = async ({ params }: ArticleDetailPageProps) => {
     where: {
       id: BigInt(id),
     },
+    include: {
+      user: true,
+      category: true,
+    },
   });
 
   if (!article) {
@@ -99,17 +103,24 @@ const ArticleDetailPage = async ({ params }: ArticleDetailPageProps) => {
             <div className={styles.header}>
               <h1 className={styles.articleTitle}>{article.title}</h1>
               <div className={styles.author}>
-                <span className={styles.authorName}>{article.author}</span>
+                <span className={styles.authorName}>{article.user.name ?? "名無しユーザー"}</span>
                 <div className={styles.authorIcon}>
-                  <Image src={article.authorIcon} alt={article.authorIconAlt} />
+                  <Image
+                    src={article.user.icon_path || dummyAuthorIcon}
+                    alt={`${article.user.name || "ユーザー"}のアイコン`}
+                    width={40}
+                    height={40}
+                  />
                 </div>
               </div>
             </div>
-            <div className={styles.image}>
-              <Image src={article.image} alt={article.imageAlt} />
-            </div>
+            {article.imagePath && (
+              <div className={styles.image}>
+                <Image src={article.imagePath} alt={article.title || "記事のメイン画像"} width={800} height={450} />
+              </div>
+            )}
             <div className={styles.body}>
-              <p className={styles.category}>{article.category}</p>
+              <p className={styles.category}>{article.category.name}</p>
               <p className={styles.text}>{article.content}</p>
             </div>
             <div className={styles.footer}>
