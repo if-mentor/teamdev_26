@@ -21,12 +21,15 @@ export async function POST(request: Request) {
   if (!trimmedPassword) {
     return NextResponse.json({ error: "パスワードを入力してください" }, { status: 400 });
   }
-  const { error } = await supabase.auth.signInWithPassword({
+  const { data, error } = await supabase.auth.signInWithPassword({
     email: trimmedEmail,
     password: trimmedPassword,
   });
   if (error) {
     return NextResponse.json({ error: "メールアドレスまたはパスワードが一致しません" }, { status: 400 });
   }
-  return NextResponse.json({ message: "ログインに成功しました" }, { status: 200 });
+  return NextResponse.json(
+    { message: "ログインに成功しました", accessToken: data.session.access_token },
+    { status: 200 },
+  );
 }
