@@ -2,18 +2,8 @@
 
 import { useEffect, useState } from "react";
 import CommentCard from "@/components/CommentCard";
-import type { ReactNode } from "react";
-import type { Comment } from "@/types/comment";
-
-type CommentListProps = {
-  postId: string;
-  children: ReactNode;
-  classNames: {
-    title: string;
-    num: string;
-    cardWrap: string;
-  };
-};
+import type { Comment } from "@/components/CommentList/type";
+import type { CommentListProps } from "@/components/CommentList/type";
 
 const CommentList = ({ postId, children, classNames }: CommentListProps) => {
   const [comments, setComments] = useState<Comment[]>([]);
