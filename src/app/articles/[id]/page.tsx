@@ -4,40 +4,7 @@ import styles from "./styles.module.css";
 import CommentForm from "@/components/CommentForm";
 import CommentCard from "@/components/CommentCard";
 import { prisma } from "@/libs/prisma";
-
-const MINUTE = 60 * 1000;
-const HOUR = 60 * MINUTE;
-const DAY = 24 * HOUR;
-const WEEK = 7 * DAY;
-
-const formatRelativeTime = (dateString: string, now: Date = new Date()) => {
-  const target = new Date(dateString);
-  const diff = now.getTime() - target.getTime();
-
-  if (diff < MINUTE) return "just now";
-
-  const minutes = Math.floor(diff / MINUTE);
-
-  if (minutes === 1) return "a min ago";
-  if (diff < HOUR) return `${minutes} mins ago`;
-
-  const hours = Math.floor(diff / HOUR);
-
-  if (hours === 1) return "an hour ago";
-  if (diff < DAY) return `${hours} hours ago`;
-
-  const days = Math.floor(diff / DAY);
-
-  if (days === 1) return "a day ago";
-  if (diff < WEEK) return `${days} days ago`;
-
-  return target.toLocaleDateString("ja-JP", {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    timeZone: "Asia/Tokyo",
-  });
-};
+import { formatRelativeTime } from "@/utils/formatRelativeTime";
 
 const dummyComments = [
   {
