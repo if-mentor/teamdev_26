@@ -19,7 +19,16 @@ export async function GET(request: Request, context: RouteContext) {
     const comments = await prisma.comment.findMany({
       where: { postId: BigInt(id) },
       orderBy: { createdAt: "desc" },
+      include: {
+        user: {
+          select: {
+            name: true,
+          },
+        },
+      },
     });
+
+    console.log(comments[0]?.user);
 
     return NextResponse.json(
       comments.map((comment) => ({

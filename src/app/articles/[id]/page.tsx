@@ -2,10 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./styles.module.css";
 import CommentForm from "@/components/CommentForm";
-import CommentCard from "@/components/CommentCard";
 import dummyImage from "../../../../public/sample1.jpg";
 import dummyAuthorIcon from "../../../../public/default_user_icon.png";
 import { formatRelativeTime } from "@/utils/formatRelativeTime";
+import CommentList from "@/components/CommentList";
 
 const dummyArticle = {
   id: 1,
@@ -20,23 +20,6 @@ const dummyArticle = {
     "テキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入ります",
   createdAt: "2026-10-01T20:37:00+09:00",
 };
-
-const dummyComments = [
-  {
-    id: 1,
-    userName: "ユーザー名",
-    createdAt: "2026-09-30T16:00:00+09:00",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ligula nibh, interdum non enim sit amet, iaculis aliquet nunc.",
-  },
-  {
-    id: 2,
-    userName: "ユーザー名",
-    createdAt: "2026-09-30T16:00:00+09:00",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ligula nibh, interdum non enim sit amet, iaculis aliquet nunc.",
-  },
-];
 
 type ArticleDetailPageProps = {
   params: Promise<{
@@ -79,17 +62,18 @@ const ArticleDetailPage = async ({ params }: ArticleDetailPageProps) => {
           </article>
 
           <section className={styles.commentSection}>
-            <h2 className={styles.commentTitle}>
-              <span className={styles.num}>{dummyComments.length}</span>件のコメント
-            </h2>
-            <div className={styles.commentFormWrap}>
-              <CommentForm />
-            </div>
-            <div className={styles.commentCardWrap}>
-              {dummyComments.map((comment) => (
-                <CommentCard key={comment.id} {...comment} />
-              ))}
-            </div>
+            <CommentList
+              postId={id}
+              classNames={{
+                title: styles.commentTitle,
+                num: styles.num,
+                cardWrap: styles.commentCardWrap,
+              }}
+            >
+              <div className={styles.commentFormWrap}>
+                <CommentForm />
+              </div>
+            </CommentList>
           </section>
         </div>
       </main>
