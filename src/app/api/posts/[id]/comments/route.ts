@@ -13,9 +13,6 @@ export async function GET(request: Request, context: RouteContext) {
   }
 
   try {
-    // テスト用：意図的にエラーを発生させる
-    // throw new Error("500エラーのテスト");
-
     const comments = await prisma.comment.findMany({
       where: { postId: BigInt(id) },
       orderBy: { createdAt: "desc" },
