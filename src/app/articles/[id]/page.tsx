@@ -2,26 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./styles.module.css";
 import CommentForm from "@/components/CommentForm";
-import CommentCard from "@/components/CommentCard";
 import { prisma } from "@/libs/prisma";
-import { formatRelativeTime } from "@/utils/formatRelativeTime";
 
-const dummyComments = [
-  {
-    id: 1,
-    userName: "ユーザー名",
-    createdAt: "2026-09-30T16:00:00+09:00",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ligula nibh, interdum non enim sit amet, iaculis aliquet nunc.",
-  },
-  {
-    id: 2,
-    userName: "ユーザー名",
-    createdAt: "2026-09-30T16:00:00+09:00",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ligula nibh, interdum non enim sit amet, iaculis aliquet nunc.",
-  },
-];
+import { formatRelativeTime } from "@/utils/formatRelativeTime";
+import CommentList from "@/components/CommentList";
 
 type ArticleDetailPageProps = {
   params: Promise<{
@@ -56,14 +40,12 @@ const ArticleDetailPage = async ({ params }: ArticleDetailPageProps) => {
               <div className={styles.author}>
                 <span className={styles.authorName}>{article.user.name}</span>
                 <div className={styles.authorIcon}>
-                  <div className={styles.authorIcon}>
-                    <Image
-                      src={article.user.imagePath || "/default_user_icon.png"}
-                      alt={`${article.user.name || "ユーザー"}のアイコン`}
-                      width={40}
-                      height={40}
-                    />
-                  </div>
+                  <Image
+                    src={article.user.imagePath || "/default_user_icon.png"}
+                    alt={`${article.user.name || "ユーザー"}のアイコン`}
+                    width={40}
+                    height={40}
+                  />
                 </div>
               </div>
             </div>
@@ -87,17 +69,18 @@ const ArticleDetailPage = async ({ params }: ArticleDetailPageProps) => {
           </article>
 
           <section className={styles.commentSection}>
-            <h2 className={styles.commentTitle}>
-              <span className={styles.num}>{dummyComments.length}</span>件のコメント
-            </h2>
-            <div className={styles.commentFormWrap}>
-              <CommentForm />
-            </div>
-            <div className={styles.commentCardWrap}>
-              {dummyComments.map((comment) => (
-                <CommentCard key={comment.id} {...comment} />
-              ))}
-            </div>
+            <CommentList
+              postId={id}
+              classNames={{
+                title: styles.commentTitle,
+                num: styles.num,
+                cardWrap: styles.commentCardWrap,
+              }}
+            >
+              <div className={styles.commentFormWrap}>
+                <CommentForm />
+              </div>
+            </CommentList>
           </section>
         </div>
       </main>
