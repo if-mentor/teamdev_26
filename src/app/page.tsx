@@ -2,6 +2,7 @@ import styles from "./styles.module.css";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import Card from "@/components/Card";
+import TextBox from "@/components/TextBox";
 
 export default function Home() {
   const articles = Array.from({ length: 8 }, (_, index) => ({
@@ -34,6 +35,7 @@ export default function Home() {
           />
         ))}
       </div>
+      <TextBox />
     </div>
   );
 }
