@@ -76,7 +76,6 @@ export function NewArticleForm() {
       return;
     }
 
-    const token = sessionStorage.getItem("accessToken");
     const formData = new FormData();
     formData.append("title", title);
     formData.append("content", content);
@@ -88,9 +87,6 @@ export function NewArticleForm() {
     try {
       const response = await fetch("/api/posts", {
         method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
         body: formData,
       });
 

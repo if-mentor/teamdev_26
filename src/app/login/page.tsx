@@ -42,7 +42,6 @@ const Login = () => {
 
       return;
     }
-    sessionStorage.setItem("accessToken", data.accessToken);
     router.push("/");
   };
   return (

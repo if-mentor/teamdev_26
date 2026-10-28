@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
+import { createSupabaseServerClient } from "@/libs/supabase/server";
 import { prisma } from "@/libs/prisma";
 
 const BUCKET_NAME = "post-images";
@@ -7,41 +7,19 @@ const MAX_FILE_SIZE = 3 * 1024 * 1024;
 const ALLOWED_TYPES = ["image/jpeg", "image/png"];
 
 export async function POST(request: Request) {
-  // ① ログインしているユーザーを確認
-  const authorization = request.headers.get("Authorization");
-
-  if (!authorization?.startsWith("Bearer ")) {
-    return NextResponse.json({ error: "ログインが必要です" }, { status: 401 });
-  }
-
-  const token = authorization.slice(7);
-
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
-    {
-      global: {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      },
-      auth: {
-        persistSession: false,
-        autoRefreshToken: false,
-      },
-    },
-  );
+  // ログインしているユーザーを確認
+  const supabase = await createSupabaseServerClient();
 
   const {
     data: { user },
     error: authError,
-  } = await supabase.auth.getUser(token);
+  } = await supabase.auth.getUser();
 
   if (authError || !user) {
     return NextResponse.json({ error: "ログイン情報を確認できません" }, { status: 401 });
   }
 
-  // ② 投稿データを受け取る
+  // 投稿データを受け取る
   let formData: FormData;
 
   try {
@@ -59,7 +37,7 @@ export async function POST(request: Request) {
 
   const content = typeof contentValue === "string" ? contentValue.trim() : "";
 
-  // ③ バリデーション
+  // バリデーション
   if (title.length < 1 || title.length > 40) {
     return NextResponse.json({ error: "タイトルは1〜40文字で入力してください" }, { status: 400 });
   }
@@ -93,7 +71,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    // ④ ユーザーとカテゴリが存在するか確認
+    // ユーザーとカテゴリが存在するか確認
     const [existingUser, category] = await Promise.all([
       prisma.user.findUnique({
         where: { id: user.id },
@@ -111,7 +89,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "カテゴリが見つかりません" }, { status: 400 });
     }
 
-    // ⑤ 画像をSupabase Storageに保存
+    // 画像をSupabase Storageに保存
     const extension = image.type === "image/png" ? "png" : "jpg";
     const filePath = `${user.id}/${crypto.randomUUID()}.${extension}`;
 
@@ -126,18 +104,15 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "画像の保存に失敗しました" }, { status: 500 });
     }
 
-    // ⑥ 画像の公開URLを取得
-    const { data: urlData } = supabase.storage.from(BUCKET_NAME).getPublicUrl(filePath);
-
     try {
-      // ⑦ Prismaで記事を保存
+      // Prismaで記事を保存
       const post = await prisma.post.create({
         data: {
           userId: user.id,
           categoryId,
           title,
           content,
-          imagePath: urlData.publicUrl,
+          imagePath: filePath,
         },
       });
 
