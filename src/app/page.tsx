@@ -6,7 +6,7 @@ import CardSkeleton from "@/components/CardSkeleton";
 import { Suspense } from "react";
 
 import { prisma } from "@/libs/prisma";
-import { supabase } from "@/libs/supabase";
+import { supabaseBrowser } from "@/libs/supabase/client";
 
 async function ArticleList() {
   const articles = await prisma.post.findMany({
@@ -23,7 +23,7 @@ async function ArticleList() {
           title={article.title}
           author={article.user.name}
           category={article.category.name}
-          imageUrl={supabase.storage.from("post-images").getPublicUrl(article.imagePath).data.publicUrl}
+          imageUrl={supabaseBrowser.storage.from("post-images").getPublicUrl(article.imagePath!).data.publicUrl}
           content={article.content}
           createdAt={article.createdAt.toISOString()}
         />
