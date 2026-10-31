@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { supabase } from "@/libs/supabase";
+import { createSupabaseServerClient } from "@/libs/supabase/server";
 
 export async function POST(request: Request) {
   const body = await request.json();
@@ -21,6 +21,7 @@ export async function POST(request: Request) {
   if (!trimmedPassword) {
     return NextResponse.json({ error: "パスワードを入力してください" }, { status: 400 });
   }
+  const supabase = await createSupabaseServerClient();
   const { error } = await supabase.auth.signInWithPassword({
     email: trimmedEmail,
     password: trimmedPassword,
