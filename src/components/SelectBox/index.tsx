@@ -1,14 +1,14 @@
 import styles from "./styles.module.css";
 import type { SelectBoxProps } from "./type";
 
-const SelectBox = ({ options, label, placeholder }: SelectBoxProps) => {
+const SelectBox = ({ options, label, placeholder, ...props }: SelectBoxProps) => {
   return (
     <>
       <div className={styles.selectBoxContainer}>
         {label && <label className={styles.label}>{label}</label>}
 
         <div className={styles.selectBoxWrapper}>
-          <select className={styles.selectBox} defaultValue="">
+          <select className={styles.selectBox} {...props}>
             {placeholder && (
               <option value="" disabled>
                 {placeholder}
@@ -17,7 +17,7 @@ const SelectBox = ({ options, label, placeholder }: SelectBoxProps) => {
 
             {options.map((option) => {
               return (
-                <option key={option.id} value={option.value} className={styles.option}>
+                <option key={option.id} value={option.id} className={styles.option}>
                   {option.value}
                 </option>
               );
