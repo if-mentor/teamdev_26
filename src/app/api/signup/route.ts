@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { supabase } from "@/libs/supabase";
+import { createSupabaseServerClient } from "@/libs/supabase/server";
 import { prisma } from "@/libs/prisma";
 
 export async function POST(request: Request) {
@@ -51,7 +51,7 @@ export async function POST(request: Request) {
   if (existingUser) {
     return NextResponse.json({ error: "このメールアドレスは既に登録されています" }, { status: 400 });
   }
-
+  const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase.auth.signUp({
     email: trimmedEmail,
     password: trimmedPassword,

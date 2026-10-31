@@ -3,6 +3,7 @@ import Link from "next/link";
 import styles from "./styles.module.css";
 import CommentForm from "@/components/CommentForm";
 import { prisma } from "@/libs/prisma";
+import { createSupabaseServerClient } from "@/libs/supabase/server";
 
 import { formatRelativeTime } from "@/utils/formatRelativeTime";
 import CommentList from "@/components/CommentList";
@@ -30,6 +31,11 @@ const ArticleDetailPage = async ({ params }: ArticleDetailPageProps) => {
     return <p>記事が見つかりませんでした。</p>;
   }
 
+  const supabase = await createSupabaseServerClient();
+
+  const imageUrl = article.imagePath
+    ? supabase.storage.from("post-images").getPublicUrl(article.imagePath).data.publicUrl
+    : null;
   return (
     <>
       <main className={styles.content}>
@@ -49,9 +55,9 @@ const ArticleDetailPage = async ({ params }: ArticleDetailPageProps) => {
                 </div>
               </div>
             </div>
-            {article.imagePath && (
+            {imageUrl && (
               <div className={styles.image}>
-                <Image src={article.imagePath} alt={article.title || "記事のメイン画像"} width={800} height={450} />
+                <Image src={imageUrl} alt={article.title || "記事のメイン画像"} width={800} height={450} unoptimized />
               </div>
             )}
             <div className={styles.body}>
